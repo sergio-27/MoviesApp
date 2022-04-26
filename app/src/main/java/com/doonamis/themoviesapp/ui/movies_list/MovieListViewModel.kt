@@ -3,12 +3,9 @@ package com.doonamis.themoviesapp.ui.movies_list
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.doonamis.themoviesapp.data.remote.MovieApiService
-import com.doonamis.themoviesapp.data.repositories.MoviesRepository
 import com.doonamis.themoviesapp.data.usecases.MovieUseCases
 import com.doonamis.themoviesapp.model.TvShow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.Observable
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
 package com.doonamis.themoviesapp.data.remote
 
 import com.doonamis.themoviesapp.model.TvShow
-import io.reactivex.Observable
+import com.doonamis.themoviesapp.model.response.PopularTvShowsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -11,10 +11,10 @@ class MovieApiService @Inject constructor(
     private val moviesApi: MoviesApi
 ) : MoviesService {
 
-    override suspend fun getPopularTvShows(): List<TvShow> {
+    override suspend fun getPopularTvShows(page: Int): List<TvShow> {
         return withContext(Dispatchers.IO) {
-            val response: Response<List<TvShow>> = moviesApi.getPopularTvShows()
-            response.body() ?: emptyList()
+            val response: Response<PopularTvShowsResponse> = moviesApi.getPopularTvShows(page = page)
+            response.body()?.results ?: emptyList()
         }
     }
 }

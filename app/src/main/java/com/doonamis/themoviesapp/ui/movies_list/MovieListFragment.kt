@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.doonamis.themoviesapp.R
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 @AndroidEntryPoint
@@ -26,12 +26,17 @@ class MovieListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel.onInit()
+
+
+        viewModel.popularTvShowsLiveData.observe(this, Observer {
+            Log.d(TAG, it.size.toString())
+        })
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_movie_list, container, false)
 
 //        viewModel.getPopularTvShows()

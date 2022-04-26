@@ -2,7 +2,6 @@ package com.doonamis.themoviesapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.doonamis.themoviesapp.R
 import com.doonamis.themoviesapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
