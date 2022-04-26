@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheMoviesApp">
         <activity
-            android:name="com.doonamis.themoviesapp.ui.movies_list.MainActivity"
+            android:name="com.doonamis.themoviesapp.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
