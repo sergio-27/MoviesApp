@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 object Utils {
-
     //method to know when recycler view last item is visible
     fun isLastItemDisplaying(recyclerView: RecyclerView): Boolean {
         if (recyclerView.adapter!!.itemCount != 0) {
@@ -16,4 +15,6 @@ object Utils {
         }
         return false
     }
+
+
 }
