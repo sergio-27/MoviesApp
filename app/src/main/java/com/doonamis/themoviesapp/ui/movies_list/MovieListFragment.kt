@@ -70,7 +70,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnPopularTvShowClickListe
             viewModel.getPopularTvShows(page)
         }
 
-        Log.d(TAG, "page $page")
+        Log.d(TAG, "page $page and $isInitLoad")
 
     }
 
@@ -78,6 +78,7 @@ class MovieListFragment : Fragment(), MovieListAdapter.OnPopularTvShowClickListe
         val mutableList = newList.toMutableList()
         popularTvShowAdapter.appendMovies(mutableList)
         popularTvShows = mutableList
+        Log.d(TAG, "update list")
     }
 
 
