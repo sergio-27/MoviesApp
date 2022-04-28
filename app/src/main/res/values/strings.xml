@@ -4,5 +4,9 @@
     <string name="airdate">Airdate: %s</string>
     <string name="tv_show_vote_average">Vote average: %.2f%n</string>
     <string name="tv_show_vote_count">Vote count: %d</string>
+    <string name="choose_theme_title">Choose Theme</string>
+    <string name="light_theme_text">Light</string>
+    <string name="dark_theme_text">Dark</string>
+    <string name="system_default_theme_text">System default</string>
 
 </resources>
