@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TheMoviesApp</string>
+    <string name="app_name">Popular TvShows</string>
 
     <string name="airdate">Airdate: %s</string>
     <string name="tv_show_vote_average">Vote average: %.2f%n</string>

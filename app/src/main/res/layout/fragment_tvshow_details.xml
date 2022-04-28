@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".ui.movie_details.MovieDetailsFragment">
+    tools:context=".ui.tvshow_details.TvShowDetailsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,13 +7,13 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import javax.inject.Inject
 
-class MovieApiService @Inject constructor(
-    private val moviesApi: MoviesApi
-) : MoviesService {
+class TvShowApiService @Inject constructor(
+    private val tvShowApi: TvShowApi
+) : TvShowService {
 
     override suspend fun getPopularTvShows(page: Int): List<TvShow> {
         return withContext(Dispatchers.IO) {
-            val response: Response<PopularTvShowsResponse> = moviesApi.getPopularTvShows(page = page)
+            val response: Response<PopularTvShowsResponse> = tvShowApi.getPopularTvShows(page = page)
             response.body()?.results ?: emptyList()
         }
     }

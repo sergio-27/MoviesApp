@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/moviesListFragment">
+    app:startDestination="@id/tvshowListFragment">
 
     <fragment
-        android:id="@+id/moviesListFragment"
-        android:name="com.doonamis.themoviesapp.ui.movies_list.MovieListFragment"
+        android:id="@+id/tvshowListFragment"
+        android:name="com.doonamis.themoviesapp.ui.tvshow_list.TvShowListFragment"
         android:label="Movies List"
-        tools:layout="@layout/fragment_movie_list">
+        tools:layout="@layout/fragment_tvshow_list">
         <action
-            android:id="@+id/action_moviesListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment">
+            android:id="@+id/action_tvshowListFragment_to_tvshowDetailFragment"
+            app:destination="@id/tvshowDetailFragment">
 
             <argument
                 android:name="tvshow"
@@ -23,10 +23,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.doonamis.themoviesapp.ui.movie_details.MovieDetailsFragment"
-        android:label="Movie Detail"
-        tools:layout="@layout/fragment_movie_details">
+        android:id="@+id/tvshowDetailFragment"
+        android:name="com.doonamis.themoviesapp.ui.tvshow_details.TvShowDetailsFragment"
+        android:label="TvShow Detail"
+        tools:layout="@layout/fragment_tvshow_details">
         <argument
             android:name="tvshow"
             app:argType="com.doonamis.themoviesapp.model.TvShow" />

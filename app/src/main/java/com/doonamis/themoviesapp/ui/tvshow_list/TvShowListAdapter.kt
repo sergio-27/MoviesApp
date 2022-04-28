@@ -1,4 +1,4 @@
-package com.doonamis.themoviesapp.ui.movies_list
+package com.doonamis.themoviesapp.ui.tvshow_list
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,12 +13,12 @@ import com.doonamis.themoviesapp.model.TvShow
 import com.doonamis.themoviesapp.utils.URLs
 import javax.inject.Inject
 
-class MovieListAdapter @Inject constructor(
+class TvShowListAdapter @Inject constructor(
     private var context: Context,
     private var list: MutableList<TvShow>
-) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+) : RecyclerView.Adapter<TvShowListAdapter.TvShowListViewHolder>() {
 
-    inner class MovieListViewHolder(private val itemBinding: ItemPopularTvshowBinding) :
+    inner class TvShowListViewHolder(private val itemBinding: ItemPopularTvshowBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(tvShow: TvShow) = with(itemView) {
@@ -56,17 +56,21 @@ class MovieListAdapter @Inject constructor(
         )
     }
 
+    fun clearAdapterList() {
+        this.list.clear()
+    }
+
     private var onTvShowClickListener: OnPopularTvShowClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowListViewHolder {
         // Create a new view, which defines the UI of the list item
         val itemBinding =
             ItemPopularTvshowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return MovieListViewHolder(itemBinding)
+        return TvShowListViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TvShowListViewHolder, position: Int) {
         holder.bind(list[position])
         val popularTvShow = list[position]
 

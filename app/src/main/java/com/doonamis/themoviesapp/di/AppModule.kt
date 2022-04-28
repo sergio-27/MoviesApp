@@ -3,10 +3,10 @@ package com.doonamis.themoviesapp.di
 import android.content.Context
 import android.content.res.Resources
 import androidx.annotation.NonNull
-import com.doonamis.themoviesapp.data.remote.MovieApiService
-import com.doonamis.themoviesapp.data.remote.MoviesApi
-import com.doonamis.themoviesapp.data.repositories.MoviesRepository
-import com.doonamis.themoviesapp.navigation.MoviesAppNavigator
+import com.doonamis.themoviesapp.data.remote.TvShowApiService
+import com.doonamis.themoviesapp.data.remote.TvShowApi
+import com.doonamis.themoviesapp.data.repositories.TvShowRepository
+import com.doonamis.themoviesapp.navigation.TvShowAppNavigator
 import com.doonamis.themoviesapp.utils.RequestInterceptor
 import com.doonamis.themoviesapp.utils.URLs
 import com.google.gson.Gson
@@ -54,17 +54,17 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesMoviesAppNavigator(): MoviesAppNavigator = MoviesAppNavigator.Impl()
+    fun providesMoviesAppNavigator(): TvShowAppNavigator = TvShowAppNavigator.Impl()
 
     @Provides
-    fun provideMovieApi(retrofit: Retrofit): MoviesApi = retrofit.create(MoviesApi::class.java)
-
-    @Singleton
-    @Provides
-    fun providesMovieApiService(moviesApi: MoviesApi) = MovieApiService(moviesApi)
+    fun provideMovieApi(retrofit: Retrofit): TvShowApi = retrofit.create(TvShowApi::class.java)
 
     @Singleton
     @Provides
-    fun providesMovieRepository(moviesApiService: MovieApiService) = MoviesRepository(moviesApiService)
+    fun providesMovieApiService(tvShowApi: TvShowApi) = TvShowApiService(tvShowApi)
+
+    @Singleton
+    @Provides
+    fun providesMovieRepository(moviesApiService: TvShowApiService) = TvShowRepository(moviesApiService)
 
 }
