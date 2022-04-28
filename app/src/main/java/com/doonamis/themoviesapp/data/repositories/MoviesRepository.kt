@@ -8,10 +8,7 @@ class MoviesRepository @Inject constructor(
     private val moviesApi: MoviesService
 ){
 
-    var tvShowPage: Int = 1
-
-    suspend fun getPopularTvShows(): List<TvShow> {
-        tvShowPage+=1
+    suspend fun getPopularTvShows(tvShowPage: Int): List<TvShow> {
         val response: List<TvShow> = moviesApi.getPopularTvShows(tvShowPage)
         //todo save data locally
         return response

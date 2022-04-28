@@ -1,8 +1,10 @@
 package com.doonamis.themoviesapp.model
 
+import android.os.Parcelable
 import com.doonamis.themoviesapp.utils.URLs
+import kotlinx.parcelize.Parcelize
 
-//todo mapear
+@Parcelize
 data class TvShow(
     val id: Int,
     val poster_path: String?,
@@ -18,6 +20,6 @@ data class TvShow(
     val name: String,
     val original_name: String,
     var page: Int
-){
+) : Parcelable {
     fun getPosterUrl() = "${URLs.base_image_url}$poster_path"
 }

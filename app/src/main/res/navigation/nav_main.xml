@@ -12,7 +12,13 @@
         tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/action_moviesListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment">
+
+            <argument
+                android:name="tvshow"
+                app:argType="com.doonamis.themoviesapp.model.TvShow" />
+
+        </action>
 
     </fragment>
 
@@ -20,6 +26,10 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.doonamis.themoviesapp.ui.movie_details.MovieDetailsFragment"
         android:label="Movie Detail"
-        tools:layout="@layout/fragment_movie_details"/>
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="tvshow"
+            app:argType="com.doonamis.themoviesapp.model.TvShow" />
+    </fragment>
 
 </navigation>

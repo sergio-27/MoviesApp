@@ -20,14 +20,25 @@ class MovieListViewModel @Inject constructor(
 //        return movieUseCases()
 //    }
 
-    fun onInit() {
-         viewModelScope.launch {
-             val result = movieUseCases()
+/*         viewModelScope.launch {
+             val result = movieUseCases.getPopularTvShows(1)
 
              if (!result.isNullOrEmpty()){
                  popularTvShowsLiveData.postValue(result)
              }
          }
+    }*/
+
+
+    fun getPopularTvShows(page: Int) {
+        viewModelScope.launch {
+            val result = movieUseCases.getPopularTvShows(page)
+
+            if (!result.isNullOrEmpty()){
+                popularTvShowsLiveData.postValue(result)
+            }
+        }
     }
+
 
 }
