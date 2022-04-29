@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.doonamis.themoviesapp.R
 import com.doonamis.themoviesapp.databinding.FragmentTvshowListBinding
 import com.doonamis.themoviesapp.model.TvShow
 import com.doonamis.themoviesapp.ui.MainActivity
+import com.doonamis.themoviesapp.utils.NetworkConnListener
 import com.doonamis.themoviesapp.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,19 +32,37 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
 
     private lateinit var linearLayoutManager: LinearLayoutManager
 
+    private lateinit var popularTvShowList: List<TvShow>
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTvshowListBinding.inflate(inflater, container, false)
         val view: View = binding!!.root
-        if (Utils.isNetworkAvailable(requireContext())){
-            binding!!.rvPopularTvShows.visibility = View.VISIBLE
-            binding!!.tvNoConnection.visibility = View.GONE
-        } else {
-            binding!!.rvPopularTvShows.visibility = View.GONE
-            binding!!.tvNoConnection.visibility = View.VISIBLE
+
+        popularTvShowAdapter = TvShowListAdapter(requireContext(), mutableListOf())
+        NetworkConnListener(requireContext()).observe(requireActivity()) {
+            //textView.text = if (it) "connected" else "disconnected"
+            if (it){
+               // binding!!.rvPopularTvShows.visibility = View.VISIBLE
+               // binding!!.tvNoConnection.visibility = View.GONE
+
+
+            } else {
+               // binding!!.rvPopularTvShows.visibility = View.GONE
+               // binding!!.tvNoConnection.visibility = View.VISIBLE
+            }
+
         }
+
+        setRecyclerView()
+        getPopularTvShows()
+        viewModel.popularTvShowsLiveData.observe(viewLifecycleOwner) {
+            updateList(it)
+        }
+
         return view
     }
 
@@ -50,15 +70,9 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         super.onViewCreated(view, savedInstanceState)
 
         //init recycler view and set scroll listener
-        if (Utils.isNetworkAvailable(requireContext())){
-            setRecyclerView()
-            getPopularTvShows()
-            viewModel.popularTvShowsLiveData.observe(viewLifecycleOwner) {
-                updateList(it)
-            }
-        }
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
+
+      (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
 
     }
 
@@ -89,13 +103,15 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         viewModel.getPopularTvShows(requireActivity().getString(R.string.api_language))
     }
 
+
     private fun updateList(newList: List<TvShow>) {
         val mutableList = newList.toMutableList()
         popularTvShowAdapter.appendMovies(mutableList)
+        popularTvShowList = mutableList
     }
 
     private fun setRecyclerView() {
-        popularTvShowAdapter = TvShowListAdapter(requireContext(), mutableListOf())
+
         linearLayoutManager = LinearLayoutManager(context)
 
         binding!!.rvPopularTvShows.apply {
@@ -108,8 +124,10 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (Utils.isLastItemDisplaying(recyclerView)) {
+                if (Utils.isLastItemDisplaying(recyclerView) && Utils.isNetworkAvailable(requireContext())) {
                     getPopularTvShows()
+                } else if (!Utils.isNetworkAvailable(requireContext())) {
+                    Toast.makeText(requireContext(), getString(R.string.network_connection_disabled), Toast.LENGTH_LONG).show()
                 }
 
             }

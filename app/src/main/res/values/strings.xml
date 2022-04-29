@@ -14,5 +14,6 @@
     <string name="api_language">en</string>
     <string name="locale_language_option_en" translatable="false">en</string>
     <string name="locale_language_option_es" translatable="false">es</string>
+    <string name="network_connection_disabled">No internet connection available</string>
 
 </resources>

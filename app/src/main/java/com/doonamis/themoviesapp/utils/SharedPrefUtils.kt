@@ -1,7 +1,7 @@
 package com.doonamis.themoviesapp.utils
 
 import android.content.Context
-import androidx.preference.PreferenceManager
+import android.preference.PreferenceManager
 
 class SharedPrefUtils(context: Context?) {
 
@@ -16,6 +16,6 @@ class SharedPrefUtils(context: Context?) {
     var themeMode = prefs.getInt(THEME_MODE, 0)
         set(value) = prefs.edit().putInt(THEME_MODE, value).apply()
 
-    var langOption = prefs.getInt(LANG_SELECTED, 0)
+    var langOption = prefs.getInt(LANG_SELECTED, 1)
         set(value) = prefs.edit().putInt(LANG_SELECTED, value).apply()
 }
