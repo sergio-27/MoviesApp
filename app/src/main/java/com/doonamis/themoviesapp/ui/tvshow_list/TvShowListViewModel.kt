@@ -22,12 +22,12 @@ class TvShowListViewModel @Inject constructor(
         page = 0
     }
 
-    fun getPopularTvShows() {
+    fun getPopularTvShows(language: String) {
 
         viewModelScope.launch {
             page += 1
             //fetch paginated data from TMDB server
-            val result = tvShowUseCases.getPopularTvShows(page)
+            val result = tvShowUseCases.getPopularTvShows(page, language)
 
             if (!result.isNullOrEmpty()){
                 popularTvShowsLiveData.postValue(result)

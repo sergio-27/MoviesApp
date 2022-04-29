@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="airdate">Fecha estreno: %s</string>
+    <string name="tv_show_vote_average">Media votos: %.2f%n</string>
+    <string name="tv_show_vote_count">Conteo votos: %d</string>
+    <string name="choose_theme_title">Escoger estilo</string>
+    <string name="system_default_theme_text">Por defecto</string>
+    <string name="choose_lang">Escoger idioma</string>
+    <string name="lang_option_es">Español</string>
+    <string name="lang_option_en">Inglés</string>
+    <string name="api_language">es</string>
+</resources>

@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">Popular TvShows</string>
+    <string name="app_name" translatable="false">Popular TvShows</string>
 
     <string name="airdate">Airdate: %s</string>
     <string name="tv_show_vote_average">Vote average: %.2f%n</string>
     <string name="tv_show_vote_count">Vote count: %d</string>
     <string name="choose_theme_title">Choose Theme</string>
-    <string name="light_theme_text">Light</string>
-    <string name="dark_theme_text">Dark</string>
+    <string name="light_theme_text" translatable="false">Light</string>
+    <string name="dark_theme_text" translatable="false">Dark</string>
     <string name="system_default_theme_text">System default</string>
+    <string name="choose_lang">Choose language</string>
+    <string name="lang_option_es">Spanish</string>
+    <string name="lang_option_en">English</string>
+    <string name="api_language">en</string>
+    <string name="locale_language_option_en" translatable="false">en</string>
+    <string name="locale_language_option_es" translatable="false">es</string>
 
 </resources>

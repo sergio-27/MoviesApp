@@ -11,9 +11,9 @@ class TvShowApiService @Inject constructor(
     private val tvShowApi: TvShowApi
 ) : TvShowService {
 
-    override suspend fun getPopularTvShows(page: Int): List<TvShow> {
+    override suspend fun getPopularTvShows(page: Int, language: String): List<TvShow> {
         return withContext(Dispatchers.IO) {
-            val response: Response<PopularTvShowsResponse> = tvShowApi.getPopularTvShows(page = page)
+            val response: Response<PopularTvShowsResponse> = tvShowApi.getPopularTvShows(page = page, language = language)
             response.body()?.results ?: emptyList()
         }
     }

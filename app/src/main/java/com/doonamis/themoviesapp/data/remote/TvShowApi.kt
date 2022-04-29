@@ -9,5 +9,5 @@ import retrofit2.http.Query
 interface TvShowApi {
 
     @GET("tv/popular")
-    suspend fun getPopularTvShows(@Query("page") page: Int): Response<PopularTvShowsResponse>
+    suspend fun getPopularTvShows(@Query("page") page: Int, @Query("language") language: String): Response<PopularTvShowsResponse>
 }

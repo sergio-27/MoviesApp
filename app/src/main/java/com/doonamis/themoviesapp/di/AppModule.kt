@@ -3,6 +3,7 @@ package com.doonamis.themoviesapp.di
 import android.content.Context
 import android.content.res.Resources
 import androidx.annotation.NonNull
+import com.doonamis.themoviesapp.data.database.dao.TvShowDao
 import com.doonamis.themoviesapp.data.remote.TvShowApiService
 import com.doonamis.themoviesapp.data.remote.TvShowApi
 import com.doonamis.themoviesapp.data.repositories.TvShowRepository
@@ -63,8 +64,9 @@ object AppModule {
     @Provides
     fun providesMovieApiService(tvShowApi: TvShowApi) = TvShowApiService(tvShowApi)
 
+
     @Singleton
     @Provides
-    fun providesMovieRepository(moviesApiService: TvShowApiService) = TvShowRepository(moviesApiService)
+    fun providesMovieRepository(moviesApiService: TvShowApiService, dao: TvShowDao) = TvShowRepository(moviesApiService, dao)
 
 }

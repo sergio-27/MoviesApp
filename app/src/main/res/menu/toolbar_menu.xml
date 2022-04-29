@@ -6,7 +6,16 @@
         android:id="@+id/action_change_theme"
         android:orderInCategory="100"
         android:icon="@drawable/ic_dark_mode"
-        android:title="Refresh"
+        android:iconTint="@color/white"
+        android:title="ChangeTheme"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_change_lang"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_language"
+        android:title="ChangeLang"
+        android:iconTint="@color/white"
         app:showAsAction="always" />
 
 

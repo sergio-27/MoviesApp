@@ -36,7 +36,13 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
     ): View {
         binding = FragmentTvshowListBinding.inflate(inflater, container, false)
         val view: View = binding!!.root
-
+        if (Utils.isNetworkAvailable(requireContext())){
+            binding!!.rvPopularTvShows.visibility = View.VISIBLE
+            binding!!.tvNoConnection.visibility = View.GONE
+        } else {
+            binding!!.rvPopularTvShows.visibility = View.GONE
+            binding!!.tvNoConnection.visibility = View.VISIBLE
+        }
         return view
     }
 
@@ -44,29 +50,17 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         super.onViewCreated(view, savedInstanceState)
 
         //init recycler view and set scroll listener
-        setRecyclerView()
-
-
-        getPopularTvShows()
+        if (Utils.isNetworkAvailable(requireContext())){
+            setRecyclerView()
+            getPopularTvShows()
+            viewModel.popularTvShowsLiveData.observe(viewLifecycleOwner) {
+                updateList(it)
+            }
+        }
 
         (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
 
-        viewModel.popularTvShowsLiveData.observe(viewLifecycleOwner) {
-            updateList(it)
-        }
-
     }
-
-
-    private fun getPopularTvShows() {
-        viewModel.getPopularTvShows()
-    }
-
-    private fun updateList(newList: List<TvShow>) {
-        val mutableList = newList.toMutableList()
-        popularTvShowAdapter.appendMovies(mutableList)
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -88,6 +82,16 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         val directions =
             TvShowListFragmentDirections.actionTvshowListFragmentToTvshowDetailFragment(tvShow)
         findNavController().navigate(directions)
+    }
+
+
+    private fun getPopularTvShows() {
+        viewModel.getPopularTvShows(requireActivity().getString(R.string.api_language))
+    }
+
+    private fun updateList(newList: List<TvShow>) {
+        val mutableList = newList.toMutableList()
+        popularTvShowAdapter.appendMovies(mutableList)
     }
 
     private fun setRecyclerView() {

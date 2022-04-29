@@ -4,5 +4,5 @@ import com.doonamis.themoviesapp.model.TvShow
 
 interface TvShowService {
 
-    suspend fun getPopularTvShows(page: Int): List<TvShow>
+    suspend fun getPopularTvShows(page: Int, language: String): List<TvShow>
 }
