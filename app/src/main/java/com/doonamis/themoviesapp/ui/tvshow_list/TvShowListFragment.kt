@@ -32,7 +32,7 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
 
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    private lateinit var popularTvShowList: List<TvShow>
+    private var popularTvShowList: List<TvShow> = emptyList()
 
 
     override fun onCreateView(
@@ -43,19 +43,7 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         val view: View = binding!!.root
 
         popularTvShowAdapter = TvShowListAdapter(requireContext(), mutableListOf())
-        NetworkConnListener(requireContext()).observe(requireActivity()) {
-            //textView.text = if (it) "connected" else "disconnected"
-            if (it){
-               // binding!!.rvPopularTvShows.visibility = View.VISIBLE
-               // binding!!.tvNoConnection.visibility = View.GONE
 
-
-            } else {
-               // binding!!.rvPopularTvShows.visibility = View.GONE
-               // binding!!.tvNoConnection.visibility = View.VISIBLE
-            }
-
-        }
 
         setRecyclerView()
         getPopularTvShows()
@@ -63,14 +51,24 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
             updateList(it)
         }
 
+        if (Utils.isNetworkAvailable(requireContext())) {
+               binding!!.rvPopularTvShows.visibility = View.VISIBLE
+               binding!!.tvNoConnection.visibility = View.GONE
+        }
+
+        //listen to connectivity changes
+        NetworkConnListener(requireContext()).observe(requireActivity()) {
+            if (it && popularTvShowList.isEmpty()) {
+                getPopularTvShows()
+            }
+        }
+
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //init recycler view and set scroll listener
-
 
       (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
 
@@ -78,6 +76,8 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
 
     override fun onDestroy() {
         super.onDestroy()
+        //set page to 0 to avoid getting next page of movies when changing theme
+        viewModel.setPageToZero()
         binding = null
     }
 
@@ -108,6 +108,14 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
         val mutableList = newList.toMutableList()
         popularTvShowAdapter.appendMovies(mutableList)
         popularTvShowList = mutableList
+
+        if (!Utils.isNetworkAvailable(requireContext()) && mutableList.isNotEmpty()) {
+            binding!!.rvPopularTvShows.visibility = View.VISIBLE
+            binding!!.tvNoConnection.visibility = View.GONE
+        } else if (mutableList.isEmpty()) {
+            binding!!.tvNoConnection.text = getString(R.string.no_connection_no_data)
+            binding!!.tvNoConnection.visibility = View.VISIBLE
+        }
     }
 
     private fun setRecyclerView() {
@@ -126,7 +134,7 @@ class TvShowListFragment : Fragment(), TvShowListAdapter.OnPopularTvShowClickLis
 
                 if (Utils.isLastItemDisplaying(recyclerView) && Utils.isNetworkAvailable(requireContext())) {
                     getPopularTvShows()
-                } else if (!Utils.isNetworkAvailable(requireContext())) {
+                } else if (Utils.isLastItemDisplaying(recyclerView) && !Utils.isNetworkAvailable(requireContext())) {
                     Toast.makeText(requireContext(), getString(R.string.network_connection_disabled), Toast.LENGTH_LONG).show()
                 }
 

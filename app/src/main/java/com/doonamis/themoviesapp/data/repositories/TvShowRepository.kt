@@ -13,8 +13,7 @@ class TvShowRepository @Inject constructor(
 ){
 
     suspend fun getPopularTvShowsFromApi(tvShowPage: Int, language: String): List<TvShow> {
-        val response: List<TvShow> = tvShowApi.getPopularTvShows(tvShowPage, language)
-        return response
+        return tvShowApi.getPopularTvShows(tvShowPage, language)
     }
 
     suspend fun getPopularTvShowsFromRoom(): List<TvShow> {

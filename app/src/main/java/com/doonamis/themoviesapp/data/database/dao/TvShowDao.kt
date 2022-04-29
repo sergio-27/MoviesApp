@@ -9,7 +9,7 @@ import com.doonamis.themoviesapp.data.database.entities.TvShowDb
 @Dao
 interface TvShowDao {
 
-    @Query("SELECT * FROM tvshows_table")
+    @Query("SELECT * FROM tvshows_table order by name")
     suspend fun getPopularTvShows(): List<TvShowDb>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

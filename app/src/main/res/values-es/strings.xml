@@ -10,4 +10,6 @@
     <string name="lang_option_es">Español</string>
     <string name="lang_option_en">Inglés</string>
     <string name="api_language">es</string>
+    <string name="network_connection_disabled">Sin conexión</string>
+    <string name="no_connection_no_data">Sin conexión y sin datos almacenados localmente</string>
 </resources>

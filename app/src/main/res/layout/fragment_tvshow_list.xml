@@ -23,6 +23,6 @@
         android:textSize="17sp"
         android:textStyle="bold"
         android:visibility="gone"
-        android:text="No internet connection available"/>
+        android:text="@string/network_connection_disabled"/>
 
 </RelativeLayout>
